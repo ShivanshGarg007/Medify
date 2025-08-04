@@ -16,7 +16,9 @@ router.post('/register', async (req, res) => {
     const newUser = await Patient.create({ name, email, password: hashed });
 
     res.status(201).json({ message: 'Registered successfully', user: newUser });
-  } catch {
+  } 
+  
+  catch {
     res.status(500).json({ message: 'Error registering user' });
   }
 });
@@ -36,7 +38,10 @@ router.post('/login', async (req, res) => {
     });
 
     res.json({ message: 'Login successful', token });
-  } catch {
+  } 
+  
+  catch(err) {
+    console.error(err);
     res.status(500).json({ message: 'Login error' });
   }
 });
