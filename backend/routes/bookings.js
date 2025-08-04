@@ -16,3 +16,5 @@ router.get('/report/:id', auth, async (req, res) => {
     res.status(500).json({ message: 'Failed to get report' });
   }
 });
+
+module.exports = router;
