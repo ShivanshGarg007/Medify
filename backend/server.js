@@ -13,7 +13,7 @@ const healthRoutes = require('./routes/health');
 
 const app = express();
 app.use(cors({ 
-  origin: ['http://localhost:5173', 'http://localhost:5173/', process.env.FRONTEND_URL, 'https://medify-yidt.onrender.com'].filter(Boolean), 
+  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL].filter(Boolean), 
   credentials: true 
 }));
 app.use(express.json());
