@@ -1,5 +1,5 @@
-const Booking = require('../models/booking');
-const Test = require('../models/test');
+const Booking = require('../models/Booking');
+const Test = require('../models/Test');
 
 // Get all bookings for a patient
 exports.getAllBookings = async (req, res) => {

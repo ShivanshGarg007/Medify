@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const PORT = 5000;
 require('dotenv').config();
+
+const PORT = process.env.PORT || 5000;
 
 const bookingRoutes = require('./routes/booking');
 const testRoutes = require('./routes/test');
@@ -12,7 +13,7 @@ const healthRoutes = require('./routes/health');
 
 const app = express();
 app.use(cors({ 
-  origin: ['http://localhost:5173', 'http://localhost:5173/', process.env.FRONTEND_URL].filter(Boolean), 
+  origin: ['http://localhost:5173', 'http://localhost:5173/', process.env.FRONTEND_URL, 'https://medify-yidt.onrender.com'].filter(Boolean), 
   credentials: true 
 }));
 app.use(express.json());

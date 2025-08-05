@@ -1,4 +1,4 @@
-const Test = require('../models/test');
+const Test = require('../models/Test');
 
 // Get all tests
 exports.getAllTests = async (req, res) => {

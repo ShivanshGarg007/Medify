@@ -1,0 +1,29 @@
+{
+  "name": "patient-portal",
+  "version": "1.0.0",
+  "description": "Medical test booking application",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "rename-models": "node rename-models.js",
+    "predeploy": "npm run rename-models",
+    "build": "cd frontend && npm install && npm run build"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "medical",
+    "booking",
+    "tests"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
