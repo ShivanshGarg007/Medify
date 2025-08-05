@@ -1,8 +1,4 @@
-Here’s a complete `README.md` file for your **Medify** project, formatted for GitHub:
 
----
-
-```md
 # Medify – Patient Portal for Booking & Viewing Lab Tests
 
 Medify is a full-stack patient-facing web application built for a digital health clinic. It allows users to register as patients, view available lab tests, book a test, and download dummy lab test reports.
@@ -154,9 +150,4 @@ Made with ❤️ by [Shivansh Garg](https://github.com/ShivanshGarg007)
 
 This project is for educational purposes only. All rights reserved.
 
-```
-
----
-
-Let me know if you want badges, tech logos, or an embedded GIF walkthrough added.
 ```
