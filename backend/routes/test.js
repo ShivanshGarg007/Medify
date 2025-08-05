@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const testController = require('../controllers/testController');
 
-// GET endpoint for tests catalog 
+// All tests list
 router.get('/', testController.getAllTests);
 
-// GET endpoint to return dummy report data as file 
-router.get('/:id', testController.getTestReport);
+// Report download
+router.get('/report/:id', testController.getTestReport);
 
 module.exports = router;

@@ -1,3 +1,4 @@
+const path = require('path');
 const Test = require('../models/Test');
 
 // Get all tests
@@ -10,47 +11,19 @@ exports.getAllTests = async (req, res) => {
   }
 };
 
-// Get test by ID and generate report
+// Serve static PDF report (no DB lookup)
 exports.getTestReport = async (req, res) => {
   try {
-    const testId = req.params.id;
-    const test = await Test.findById(testId);
-    
-    if (!test) {
-      return res.status(404).json({ message: 'Test not found' });
-    }
+    const filePath = path.join(__dirname, '..', 'MEDIFY LAB REPORT.pdf');
 
-    // Create dummy report content
-    const reportContent = `
-LABORATORY REPORT
-================
-
-Test Name: ${test.name}
-Test ID: ${test._id}
-Date: ${new Date().toLocaleDateString()}
-Time: ${new Date().toLocaleTimeString()}
-
-RESULTS:
---------
-Status: Normal
-Value: Within normal range
-Reference Range: Standard
-
-NOTES:
-------
-This is a dummy laboratory report for demonstration purposes.
-The actual test results would be populated here in a real system.
-
-Generated on: ${new Date().toISOString()}
-    `.trim();
-
-    // Set headers for file download
-    res.setHeader('Content-Type', 'text/plain');
-    res.setHeader('Content-Disposition', `attachment; filename="lab_report_${testId}.txt"`);
-    
-    res.send(reportContent);
+    res.download(filePath, `lab_report.pdf`, (err) => {
+      if (err) {
+        console.error('Error sending file:', err);
+        res.status(500).json({ message: 'Error sending PDF report' });
+      }
+    });
   } catch (err) {
     console.error('Error generating report:', err);
-    res.status(500).json({ message: 'Error generating report' });
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
