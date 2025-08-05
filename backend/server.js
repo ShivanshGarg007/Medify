@@ -8,6 +8,7 @@ require('dotenv').config();
 const bookingRoutes = require('./routes/booking');
 const testRoutes = require('./routes/test');
 const authRoutes = require('./routes/auth');
+const healthRoutes = require('./routes/health');
 
 const app = express();
 app.use(cors({ 
@@ -23,5 +24,6 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api/auth', authRoutes);
 app.use('/api/tests', testRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/health', healthRoutes);
 
 app.listen(PORT, () => console.log('Server running on port 5000'));

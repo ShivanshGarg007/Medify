@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
 import Navbar from '../components/Navbar';
+import { format } from 'date-fns';
 
 export default function Bookings() {
   const [bookings, setBookings] = useState([]);
@@ -10,24 +11,57 @@ export default function Bookings() {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="p-6">
-        <h2 className="text-2xl font-semibold mb-4">My Bookings</h2>
-                 {bookings.map(b => (
-           <div key={b._id} className="p-4 border rounded mb-2">
-             <p>Test ID: {typeof b.test === 'object' ? b.test._id : b.test}</p>
-             <p>Date: {new Date(b.date).toLocaleString()}</p>
-             <a 
-               href={`http://localhost:5000/api/tests/${typeof b.test === 'object' ? b.test._id : b.test}`}
-               target="_blank"
-               className="text-blue-600 hover:underline"
-             >
-               Download Report
-             </a>
-           </div>
-         ))}
+      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="px-4 py-6 sm:px-0">
+          <h1 className="text-3xl font-bold text-gray-900 mb-6">My Bookings</h1>
+          
+          {bookings.length > 0 ? (
+            <div className="bg-white shadow overflow-hidden sm:rounded-md">
+              <ul className="divide-y divide-gray-200">
+                {bookings.map(b => (
+                  <li key={b._id}>
+                    <div className="px-4 py-5 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-lg leading-6 font-medium text-gray-900">
+                            {typeof b.test === 'object' ? b.test.name : 'Medical Test'}
+                          </h3>
+                          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                            Test ID: {typeof b.test === 'object' ? b.test._id : b.test}
+                          </p>
+                          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                            Booked on: {new Date(b.date).toLocaleString()}
+                          </p>
+                          {b.timeSlot && (
+                            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                              <span className="font-medium">Time Slot:</span> {format(new Date(b.timeSlot), 'h:mm a')}
+                            </p>
+                          )}
+                        </div>
+                        <div>
+                          <a 
+                            href={`${import.meta.env.VITE_API_BASE_URL}/tests/${typeof b.test === 'object' ? b.test._id : b.test}`}
+                            target="_blank"
+                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                          >
+                            Download Report
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="bg-white shadow overflow-hidden sm:rounded-md p-6 text-center">
+              <p className="text-gray-500 text-lg">You don't have any bookings yet.</p>
+            </div>
+          )}
+        </div>
       </div>
-    </>
+    </div>
   );
 }
