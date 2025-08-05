@@ -25,12 +25,13 @@ export default function Bookings() {
                     <div className="px-4 py-5 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="text-lg leading-6 font-medium text-gray-900">
-                            {typeof b.test === 'object' ? b.test.name : 'Medical Test'}
-                          </h3>
-                          <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                            Test ID: {typeof b.test === 'object' ? b.test._id : b.test}
-                          </p>
+<h3 className="text-lg leading-6 font-medium text-gray-900">
+  {b.test?.name || 'Medical Test'}
+</h3>
+<p className="mt-1 max-w-2xl text-sm text-gray-500">
+  Test ID: {b.test?._id || b.test || 'N/A'}
+</p>
+
                           <p className="mt-1 max-w-2xl text-sm text-gray-500">
                             Booked on: {new Date(b.date).toLocaleString()}
                           </p>
@@ -41,13 +42,14 @@ export default function Bookings() {
                           )}
                         </div>
                         <div>
-                          <a 
-                            href={`${import.meta.env.VITE_API_BASE_URL}/tests/${typeof b.test === 'object' ? b.test._id : b.test}`}
-                            target="_blank"
-                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                          >
-                            Download Report
-                          </a>
+<a 
+  href={`${import.meta.env.VITE_API_BASE_URL}/tests/${b.test?._id || b.test || ''}`}
+  target="_blank"
+  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+>
+  Download Report
+</a>
+
                         </div>
                       </div>
                     </div>

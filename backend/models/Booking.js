@@ -8,4 +8,4 @@ const bookingSchema = new mongoose.Schema({
   reportUrl: String
 });
 
-module.exports = mongoose.model('booking', bookingSchema);
+module.exports = mongoose.model('Booking', bookingSchema);
